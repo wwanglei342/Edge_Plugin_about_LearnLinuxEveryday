@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Linux命令每日学习 Pro",
+  "version": "2.0.0",
+  "description": "精美的Linux命令学习卡片，支持搜索、收藏与成就系统。",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Linux命令每日学习",
+    "default_popup": "popup/index.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "popup/index.html"
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  }
+}

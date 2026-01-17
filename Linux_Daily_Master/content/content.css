@@ -1,0 +1,69 @@
+/* 修复卡片显示问题 */
+.linux-daily-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.linux-daily-card.hidden {
+  display: none;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: all;
+}
+
+.card-container {
+  position: relative;
+  width: 340px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 1000000;
+  pointer-events: all;
+  animation: cardAppear 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 确保按钮可点击 */
+.btn, .close-btn, .copy-btn, .copy-example-btn {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* 修复按钮悬停效果 */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+  .card-container {
+    width: 90%;
+    max-width: 320px;
+  }
+}

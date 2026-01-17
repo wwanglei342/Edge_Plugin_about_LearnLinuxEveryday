@@ -1,0 +1,453 @@
+[
+  {
+    "id": 1,
+    "command": "ls -la",
+    "description": "列出目录下所有文件（包括隐藏文件）的详细信息",
+    "explanation": "-l: 长格式显示文件权限、所有者、大小、修改时间等信息；-a: 显示所有文件，包括以.开头的隐藏文件",
+    "category": "文件操作",
+    "difficulty": "初级",
+    "example": "ls -la ~/Documents"
+  },
+  {
+    "id": 2,
+    "command": "grep -r 'pattern' directory/",
+    "description": "在目录中递归搜索包含特定模式的文件",
+    "explanation": "-r: 递归搜索所有子目录；pattern: 要匹配的字符串/正则表达式；可搭配-i（忽略大小写）、-n（显示行号）",
+    "category": "文本处理",
+    "difficulty": "中级",
+    "example": "grep -rin 'error' /var/log/"
+  },
+  {
+    "id": 3,
+    "command": "tar -czvf archive.tar.gz directory/",
+    "description": "创建gzip压缩的tar归档文件",
+    "explanation": "c: 创建新归档；z: 启用gzip压缩；v: 显示归档过程的详细信息；f: 指定归档文件名称（必须放在参数最后）",
+    "category": "文件压缩",
+    "difficulty": "中级",
+    "example": "tar -czvf backup.tar.gz ~/important_files/"
+  },
+  {
+    "id": 4,
+    "command": "find . -name \"*.txt\" -type f",
+    "description": "查找当前目录及其子目录中所有.txt普通文件",
+    "explanation": ". : 搜索起始目录（当前目录）；-name: 按文件名通配符匹配；-type f: 限定为普通文件（排除目录/链接等）；可搭配-size +10M（查找大于10M的文件）",
+    "category": "文件操作",
+    "difficulty": "初级",
+    "example": "find /tmp -name \"*.log\" -type f -mtime -7（查找7天内修改的log文件）"
+  },
+  {
+    "id": 5,
+    "command": "ps aux | grep process_name",
+    "description": "查找包含特定名称的进程信息",
+    "explanation": "ps aux: 以BSD格式显示所有用户的所有进程（a:所有用户进程；u:显示进程所属用户；x:显示无终端的进程）；|：管道符，将ps输出传给grep过滤",
+    "category": "进程管理",
+    "difficulty": "初级",
+    "example": "ps aux | grep nginx | grep -v grep（排除grep自身进程）"
+  },
+  {
+    "id": 6,
+    "command": "chmod 755 filename",
+    "description": "修改文件权限为755（所有者可读可写可执行，组/其他用户可读可执行）",
+    "explanation": "权限数字规则：r=4，w=2，x=1；7=4+2+1（所有者rwx）；5=4+1（组/其他rx）；-R可递归修改目录及子文件",
+    "category": "文件操作",
+    "difficulty": "中级",
+    "example": "chmod -R 755 /var/www/html"
+  },
+  {
+    "id": 7,
+    "command": "ssh user@hostname -p port",
+    "description": "通过SSH协议连接远程服务器",
+    "explanation": "user: 远程服务器用户名；hostname: 远程主机IP/域名；-p: 指定SSH端口（默认22）；可搭配-i指定私钥文件",
+    "category": "网络操作",
+    "difficulty": "初级",
+    "example": "ssh admin@192.168.1.100 -p 2222 -i ~/.ssh/id_rsa"
+  },
+  {
+    "id": 8,
+    "command": "scp local_file user@remote_host:remote_path",
+    "description": "通过SSH安全复制本地文件到远程服务器",
+    "explanation": "scp基于SSH加密传输；-r可递归复制目录；-P指定远程端口（注意大写P）；反向复制：scp user@host:file local_path",
+    "category": "网络操作",
+    "difficulty": "中级",
+    "example": "scp -r ~/projects user@example.com:/home/user/ -P 2222"
+  },
+  {
+    "id": 9,
+    "command": "sudo systemctl restart service_name",
+    "description": "重启Linux系统服务（systemd体系）",
+    "explanation": "sudo: 提权至管理员；systemctl: systemd服务管理工具；常用子命令：start（启动）、stop（停止）、status（状态）、enable（开机自启）",
+    "category": "系统管理",
+    "difficulty": "中级",
+    "example": "sudo systemctl status sshd; sudo systemctl enable nginx"
+  },
+  {
+    "id": 10,
+    "command": "df -h",
+    "description": "以人类可读格式显示磁盘分区空间使用情况",
+    "explanation": "df: disk free缩写；-h: human-readable，将字节转换为GB/MB等易读单位；-T可显示文件系统类型",
+    "category": "系统管理",
+    "difficulty": "初级",
+    "example": "df -hT /dev/sda1"
+  },
+  {
+    "id": 11,
+    "command": "rsync -avz source/ user@host:destination/",
+    "description": "增量同步本地文件/目录到远程服务器（支持断点续传）",
+    "explanation": "-a: 归档模式（保留权限、时间等属性）；-v: 详细输出；-z: 传输时压缩；--delete可删除目标端多余文件",
+    "category": "文件操作",
+    "difficulty": "高级",
+    "example": "rsync -avz --delete ~/data/ user@server:/backup/data/"
+  },
+  {
+    "id": 12,
+    "command": "awk '/pattern/ {print $1}' file.txt",
+    "description": "按模式匹配文本行并提取指定字段",
+    "explanation": "awk是文本分析工具；/pattern/匹配包含指定模式的行；$1表示第一个字段（默认空格分隔）；-F可指定分隔符",
+    "category": "文本处理",
+    "difficulty": "高级",
+    "example": "awk -F ':' '/root/ {print $1,$6}' /etc/passwd（以:分隔，提取root用户的用户名和家目录）"
+  },
+  {
+    "id": 13,
+    "command": "cd ~",
+    "description": "切换到当前用户的家目录",
+    "explanation": "cd: change directory缩写；~是家目录快捷符（等价于$HOME）；cd - 返回上一次工作目录；cd .. 切换到上级目录",
+    "category": "文件操作",
+    "difficulty": "初级",
+    "example": "cd /var/log; cd -（返回/var/log的上一级目录）; cd ../nginx"
+  },
+  {
+    "id": 14,
+    "command": "mkdir -p dir1/dir2/dir3",
+    "description": "递归创建多级目录（父目录不存在则自动创建）",
+    "explanation": "mkdir: make directory缩写；-p: parents，避免“目录不存在”错误；-m可创建时指定权限",
+    "category": "文件操作",
+    "difficulty": "初级",
+    "example": "mkdir -p -m 777 ~/temp/test/logs"
+  },
+  {
+    "id": 15,
+    "command": "rm -rf temp_dir",
+    "description": "强制递归删除目录及其中所有内容（无确认提示）",
+    "explanation": "rm: remove缩写；-r: recursive，递归删除目录；-f: force，强制删除（忽略不存在的文件、不提示）；使用前务必确认路径",
+    "category": "文件操作",
+    "difficulty": "中级",
+    "example": "rm -f old_file.txt; rm -rf /tmp/unused_dir"
+  },
+  {
+    "id": 16,
+    "command": "cp -p source.txt dest.txt",
+    "description": "复制文件并保留原文件的权限、时间戳等属性",
+    "explanation": "cp: copy缩写；-p: preserve，保留文件属性；-f强制覆盖目标文件；-r递归复制目录",
+    "category": "文件操作",
+    "difficulty": "初级",
+    "example": "cp -rp ~/conf /backup/conf_bak"
+  },
+  {
+    "id": 17,
+    "command": "mv old_name.txt new_name.txt",
+    "description": "重命名文件（同目录）或移动文件（跨目录）",
+    "explanation": "mv: move缩写；无-r参数（目录无需递归）；-f强制覆盖目标文件；可批量移动：mv *.log /tmp/logs/",
+    "category": "文件操作",
+    "difficulty": "初级",
+    "example": "mv /tmp/file.txt ~/docs/; mv report_2024.txt report.txt"
+  },
+  {
+    "id": 18,
+    "command": "cat -n file.txt",
+    "description": "查看文件内容并显示行号",
+    "explanation": "cat: concatenate缩写，拼接并打印文件内容；-n显示所有行号；-b仅显示非空行号；cat > new.txt 可创建新文件并输入内容",
+    "category": "文本处理",
+    "difficulty": "初级",
+    "example": "cat -n /etc/hosts; cat file1.txt file2.txt > combined.txt"
+  },
+  {
+    "id": 19,
+    "command": "less -N /var/log/syslog",
+    "description": "分页查看大文件内容（显示行号，支持上下翻页/搜索）",
+    "explanation": "less比more更灵活；-N显示行号；按/输入pattern可搜索（n下一个/N上一个）；按q退出；按G跳至文件末尾，按g跳至开头",
+    "category": "文本处理",
+    "difficulty": "初级",
+    "example": "less -S /var/log/nginx/access.log（-S禁止行折叠）"
+  },
+  {
+    "id": 20,
+    "command": "head -n 20 file.txt",
+    "description": "查看文件前20行内容",
+    "explanation": "head默认显示前10行；-n 指定行数（-n -5 显示除最后5行外的所有内容）；可同时查看多个文件：head file1.txt file2.txt",
+    "category": "文本处理",
+    "difficulty": "初级",
+    "example": "head -n 5 /etc/passwd; head -n -10 large_file.log"
+  },
+  {
+    "id": 21,
+    "command": "tail -f /var/log/nginx/access.log",
+    "description": "实时跟踪文件新增内容（动态刷新）",
+    "explanation": "tail默认显示最后10行；-f: follow，实时监控文件变化（按Ctrl+C退出）；-F 比-f更稳定（文件被替换后仍能跟踪）",
+    "category": "文本处理",
+    "difficulty": "初级",
+    "example": "tail -Fn 50 /var/log/messages（显示最后50行并实时跟踪）"
+  },
+  {
+    "id": 22,
+    "command": "chown -R user:group /data",
+    "description": "递归修改目录及子文件的所有者和所属组",
+    "explanation": "chown: change owner缩写；user: 新所有者；group: 新所属组；-R递归处理；仅管理员可修改（需sudo）",
+    "category": "文件操作",
+    "difficulty": "中级",
+    "example": "sudo chown -R www-data:www-data /var/www/html"
+  },
+  {
+    "id": 23,
+    "command": "ping -c 4 -i 2 google.com",
+    "description": "发送4个ICMP数据包测试与谷歌的网络连通性，间隔2秒",
+    "explanation": "ping基于ICMP协议；-c 指定数据包数量；-i 指定发送间隔（秒）；-W 指定超时时间；-s 指定数据包大小",
+    "category": "网络操作",
+    "difficulty": "初级",
+    "example": "ping -c 10 -i 1 -W 3 192.168.1.1"
+  },
+  {
+    "id": 24,
+    "command": "netstat -tulpn | grep 80",
+    "description": "筛选监听80端口的进程信息",
+    "explanation": "-t: TCP端口；-u: UDP端口；-l: 监听状态；-p: 显示进程PID/名称；-n: 显示IP/端口（非域名/服务名）；ss命令是netstat的替代（ss -tulpn）",
+    "category": "网络操作",
+    "difficulty": "中级",
+    "example": "ss -tulpn | grep nginx"
+  },
+  {
+    "id": 25,
+    "command": "kill -9 12345",
+    "description": "强制终止PID为12345的进程",
+    "explanation": "kill发送信号给进程；-9是SIGKILL信号（强制终止，无法捕获）；killall nginx 按进程名终止所有nginx进程；pkill nginx 等价于killall",
+    "category": "进程管理",
+    "difficulty": "中级",
+    "example": "killall -9 firefox; pkill -u user java"
+  },
+  {
+    "id": 26,
+    "command": "top -d 2 -u root",
+    "description": "每2秒刷新一次，仅显示root用户的进程",
+    "explanation": "top实时监控系统资源；-d 指定刷新间隔（秒）；-u 指定用户；按P按CPU排序，按M按内存排序，按k终止进程，按q退出",
+    "category": "系统管理",
+    "difficulty": "中级",
+    "example": "htop（top的增强版，需安装）"
+  },
+  {
+    "id": 27,
+    "command": "free -h -s 5",
+    "description": "每5秒刷新一次，以易读格式显示内存/交换分区使用情况",
+    "explanation": "free: 查看内存；-h易读格式；-s 指定刷新间隔（秒）；-t显示总计（内存+交换分区）；-g以GB为单位显示",
+    "category": "系统管理",
+    "difficulty": "初级",
+    "example": "free -ht; free -m（以MB显示）"
+  },
+  {
+    "id": 28,
+    "command": "du -sh /var/*",
+    "description": "显示/var目录下各子目录/文件的总磁盘占用量（易读格式）",
+    "explanation": "du: disk usage缩写；-s: summary，仅显示总计；-h易读格式；-d 1 指定显示深度为1级目录",
+    "category": "系统管理",
+    "difficulty": "初级",
+    "example": "du -sh -d 2 ~/; du -h /tmp | sort -rh（按大小降序排序）"
+  },
+  {
+    "id": 29,
+    "command": "wget -c -O package.tar.gz https://example.com/file.tar.gz",
+    "description": "断点续传下载文件，并保存为package.tar.gz",
+    "explanation": "wget非交互式下载工具；-c 断点续传；-O 指定保存文件名；-P 指定保存目录；--limit-rate=100k 限制下载速度（100KB/s）",
+    "category": "网络操作",
+    "difficulty": "初级",
+    "example": "wget -c -P /tmp/downloads --limit-rate=500k https://example.com/large.iso"
+  },
+  {
+    "id": 30,
+    "command": "curl -X POST -d 'name=test' -H 'Content-Type: application/x-www-form-urlencoded' https://api.example.com/submit",
+    "description": "发送POST表单请求到指定API",
+    "explanation": "curl多功能传输工具；-X 指定请求方法；-d 发送POST数据；-H 设置请求头；-o 保存响应到文件；-s 静默模式；-v 详细输出",
+    "category": "网络操作",
+    "difficulty": "中级",
+    "example": "curl -s -o /dev/null -w '%{http_code}' https://example.com（仅获取HTTP状态码）"
+  },
+  {
+    "id": 31,
+    "command": "useradd -m -s /bin/bash -G sudo testuser",
+    "description": "创建testuser用户，创建家目录，指定bash为默认shell，加入sudo组",
+    "explanation": "useradd: 创建用户；-m 创建家目录；-s 指定登录shell；-G 指定附加组；-u 指定UID；需sudo执行",
+    "category": "用户管理",
+    "difficulty": "中级",
+    "example": "sudo useradd -m -u 1005 -G www-data appuser"
+  },
+  {
+    "id": 32,
+    "command": "passwd testuser",
+    "description": "修改testuser用户的密码",
+    "explanation": "passwd: 修改用户密码；sudo passwd 改root密码；passwd -l testuser 锁定用户（禁止登录）；passwd -u testuser 解锁",
+    "category": "用户管理",
+    "difficulty": "初级",
+    "example": "sudo passwd -l testuser; sudo passwd -d testuser（清空密码）"
+  },
+  {
+    "id": 33,
+    "command": "userdel -r testuser",
+    "description": "删除testuser用户并同时删除其家目录",
+    "explanation": "userdel: 删除用户；-r 递归删除家目录和邮件目录；仅管理员可执行；需先终止用户相关进程",
+    "category": "用户管理",
+    "difficulty": "中级",
+    "example": "sudo userdel -r appuser"
+  },
+  {
+    "id": 34,
+    "command": "groupadd dev_group",
+    "description": "创建名为dev_group的用户组",
+    "explanation": "groupadd: 创建组；-g 指定GID；groupdel dev_group 删除组；usermod -aG dev_group testuser 将用户加入组",
+    "category": "用户管理",
+    "difficulty": "初级",
+    "example": "sudo groupadd -g 1010 dev_group; sudo usermod -aG dev_group testuser"
+  },
+  {
+    "id": 35,
+    "command": "fdisk -l /dev/sda",
+    "description": "查看/dev/sda磁盘的分区表信息",
+    "explanation": "fdisk: 磁盘分区工具；-l 列出分区信息；需sudo执行；lsblk 可更直观查看磁盘/分区布局",
+    "category": "磁盘管理",
+    "difficulty": "高级",
+    "example": "sudo lsblk; sudo fdisk -l"
+  },
+  {
+    "id": 36,
+    "command": "mkfs.ext4 /dev/sdb1",
+    "description": "将/dev/sdb1分区格式化为ext4文件系统",
+    "explanation": "mkfs: make filesystem缩写；ext4是常用Linux文件系统；mkfs.xfs 格式化为xfs；需先卸载分区（umount /dev/sdb1），仅管理员可执行",
+    "category": "磁盘管理",
+    "difficulty": "高级",
+    "example": "sudo umount /dev/sdb1; sudo mkfs.xfs /dev/sdb1"
+  },
+  {
+    "id": 37,
+    "command": "mount /dev/sdb1 /mnt/data",
+    "description": "将/dev/sdb1分区挂载到/mnt/data目录",
+    "explanation": "mount: 挂载文件系统；-o 指定挂载选项（如rw,defaults）；umount /mnt/data 卸载；/etc/fstab 配置开机自动挂载",
+    "category": "磁盘管理",
+    "difficulty": "中级",
+    "example": "sudo mount -o rw,noatime /dev/sdb1 /mnt/data; sudo umount /mnt/data"
+  },
+  {
+    "id": 38,
+    "command": "crontab -e",
+    "description": "编辑当前用户的定时任务",
+    "explanation": "crontab: 定时任务管理；-e 编辑；-l 列出；-r 删除所有；定时任务格式：分 时 日 月 周 命令（0 2 * * * /script/backup.sh 每天2点执行）",
+    "category": "定时任务",
+    "difficulty": "中级",
+    "example": "crontab -l; sudo crontab -e -u root（编辑root用户的定时任务）"
+  },
+  {
+    "id": 39,
+    "command": "apt update && apt install -y nginx",
+    "description": "更新Debian/Ubuntu系统软件包索引并安装nginx（无交互）",
+    "explanation": "apt: 包管理工具；update 更新索引；install 安装；-y 自动确认；apt remove nginx 卸载；apt upgrade 升级所有包",
+    "category": "软件包管理",
+    "difficulty": "初级",
+    "example": "sudo apt update; sudo apt upgrade -y; sudo apt remove --purge nginx（彻底卸载）"
+  },
+  {
+    "id": 40,
+    "command": "yum install -y httpd",
+    "description": "在CentOS/RHEL系统中安装httpd服务（无交互）",
+    "explanation": "yum: RPM包管理工具；install 安装；-y 自动确认；yum update 升级；yum remove httpd 卸载；yum list installed 列出已安装包",
+    "category": "软件包管理",
+    "difficulty": "初级",
+    "example": "sudo yum update -y; sudo yum install -y mariadb-server"
+  },
+  {
+    "id": 41,
+    "command": "journalctl -u nginx -f",
+    "description": "实时查看nginx服务的系统日志（systemd日志）",
+    "explanation": "journalctl: 查看systemd日志；-u 指定服务；-f 实时跟踪；-n 100 显示最后100行；--since \"1 hour ago\" 显示1小时内的日志",
+    "category": "日志分析",
+    "difficulty": "中级",
+    "example": "journalctl -u sshd --since \"2024-01-01 00:00\" --until \"2024-01-01 12:00\""
+  },
+  {
+    "id": 42,
+    "command": "export PATH=$PATH:/usr/local/bin",
+    "description": "临时将/usr/local/bin添加到系统环境变量PATH中",
+    "explanation": "export 设置环境变量；PATH是可执行文件搜索路径；临时生效（终端关闭后失效）；永久生效需写入~/.bashrc或/etc/profile",
+    "category": "环境变量",
+    "difficulty": "中级",
+    "example": "echo $PATH（查看PATH）; source ~/.bashrc（生效修改后的配置）"
+  },
+  {
+    "id": 43,
+    "command": "echo 'hello world' > test.txt",
+    "description": "将字符串写入test.txt文件（覆盖原有内容）",
+    "explanation": "> 是重定向输出（覆盖）；>> 是追加输出；< 是重定向输入；2> 重定向错误输出；&> 重定向所有输出",
+    "category": "管道/重定向",
+    "difficulty": "初级",
+    "example": "ls -l >> test.txt（追加）; cat < test.txt（输入重定向）; ls non_exist 2> error.log（错误重定向）"
+  },
+  {
+    "id": 44,
+    "command": "ls -l | grep '.log' | wc -l",
+    "description": "统计当前目录下.log后缀文件的数量",
+    "explanation": "| 是管道符，将前一个命令的输出作为后一个的输入；wc -l 统计行数；组合管道可实现复杂过滤统计",
+    "category": "管道/重定向",
+    "difficulty": "中级",
+    "example": "cat access.log | grep '404' | wc -l（统计404错误数量）"
+  },
+  {
+    "id": 45,
+    "command": "umask 022",
+    "description": "设置当前Shell的默认文件创建权限掩码为022",
+    "explanation": "umask 决定新建文件/目录的默认权限；022表示：文件默认644（666-022），目录默认755（777-022）；umask -S 以符号形式显示",
+    "category": "权限进阶",
+    "difficulty": "高级",
+    "example": "umask; umask -S; umask 002（文件664，目录775）"
+  },
+  {
+    "id": 46,
+    "command": "lsof -i :80",
+    "description": "查看占用80端口的进程信息",
+    "explanation": "lsof: list open files，列出打开的文件/端口；-i :端口 筛选指定端口；lsof -u user 列出用户打开的文件；lsof -p 1234 列出进程打开的文件",
+    "category": "系统监控",
+    "difficulty": "中级",
+    "example": "sudo lsof -i tcp:22; lsof | grep deleted（查找已删除但仍占用空间的文件）"
+  },
+  {
+    "id": 47,
+    "command": "uptime",
+    "description": "显示系统运行时间、负载平均值等信息",
+    "explanation": "uptime 输出：当前时间 运行时长 登录用户数 1/5/15分钟负载均值；w 命令可显示更详细的用户和负载信息",
+    "category": "系统监控",
+    "difficulty": "初级",
+    "example": "uptime; w"
+  },
+  {
+    "id": 48,
+    "command": "sed 's/old/new/g' file.txt",
+    "description": "将文件中所有old字符串替换为new（仅输出，不修改原文件）",
+    "explanation": "sed: 流编辑器；s: 替换；g: 全局替换；-i 直接修改原文件；sed '/^#/d' file.txt 删除注释行（以#开头）",
+    "category": "文本处理",
+    "difficulty": "高级",
+    "example": "sed -i 's/error/warning/g' log.txt; sed '/test/d' file.txt（删除包含test的行）"
+  },
+  {
+    "id": 49,
+    "command": "touch -t 202401011200.00 file.txt",
+    "description": "修改文件的访问/修改时间为2024年1月1日12点0分0秒",
+    "explanation": "touch 默认为创建空文件；-t 指定时间（格式：YYYYMMDDhhmm.ss）；-a 仅修改访问时间；-m 仅修改修改时间",
+    "category": "文件操作",
+    "difficulty": "中级",
+    "example": "touch new_file.txt（创建空文件）; touch -a file.txt"
+  },
+  {
+    "id": 50,
+    "command": "ln -s /data/file.txt /tmp/link.txt",
+    "description": "创建/data/file.txt的软链接（符号链接）到/tmp/link.txt",
+    "explanation": "ln: 创建链接；-s 软链接（符号链接，类似快捷方式）；无-s为硬链接（与原文件共享inode）；软链接可跨分区，硬链接不可",
+    "category": "文件操作",
+    "difficulty": "中级",
+    "example": "ln /data/file.txt /tmp/hard_link.txt（硬链接）; rm /tmp/link.txt（仅删除软链接，原文件不受影响）"
+  }
+
+]
