@@ -1,0 +1,2 @@
+# Edge_Plugin_about_LearnLinuxEveryday
+它的核心理念是利用碎片化时间，在每次打开新标签页时展示一个 Linux 命令知识卡片。
